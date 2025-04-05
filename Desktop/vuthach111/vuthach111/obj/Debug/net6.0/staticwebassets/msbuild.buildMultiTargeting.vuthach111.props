@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\vuthach111.props" />
+</Project>
