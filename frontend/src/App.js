@@ -3,7 +3,7 @@ import QucikView from "./components/home/QuickView";
 import Header from "./layouts/Header";
 import Nav from "./layouts/Nav";
 import Main from "./layouts/Main";
-import NewsLetter from "./layouts/NewsLetter";
+
 import Footer from "./layouts/Footer";
 import Reducer from "./store/Reducer";
 import { createStore } from "redux";

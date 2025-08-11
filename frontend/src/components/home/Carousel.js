@@ -27,7 +27,6 @@ class Carousel extends Component {
     this.getCategories();
     this.getProducts(1);
   }
-
   getCategories() {
     axios
       .get(`${Api}/product/categories`)

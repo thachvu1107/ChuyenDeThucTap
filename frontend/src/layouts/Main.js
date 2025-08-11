@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Home";
-import Collections from "../components/home/Collections";
 import ProductPage from "./../components/pages/products/ProductPage";
 import Wishlist from "./../components/pages/Wishlist";
 import ShoppingCart from "./../components/pages/ShoppingCart";
@@ -15,7 +14,6 @@ const Main = () => (
   <main>
     <Routes>
       <Route exact path="/" element={<Home />} />
-      <Route exact path="/collections" element={<Collections />} />
       <Route exact path="/product" element={<ProductPage />} />
       <Route exact path="/wishlist" element={<Wishlist />} />
       <Route exact path="/shopping-cart" element={<ShoppingCart />} />
