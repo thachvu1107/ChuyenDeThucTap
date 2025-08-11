@@ -1,0 +1,8 @@
+/* Topbar.css */
+.navbar-brand {
+  font-weight: bold;
+}
+
+.navbar .dropdown-menu {
+  min-width: 250px;
+}

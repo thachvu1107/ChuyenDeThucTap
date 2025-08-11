@@ -1,0 +1,219 @@
+.product {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  background: #fff;
+  margin: 15px;
+  transition: box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.product:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.product-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.product-label {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.product-label .sale {
+  background: #ff4545;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.product-label .new {
+  background: #00c853;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.product-body {
+  padding: 15px 0;
+}
+
+.product-name a {
+  color: #222;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10px;
+  line-height: 1.3;
+  height: 54px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.product-name a:hover {
+  color: #ff4545;
+}
+
+.product-price-container {
+  margin: 10px 0;
+}
+
+.product-price {
+  color: #ff4545;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.product-old-price {
+  color: #888;
+  font-size: 16px;
+  margin-left: 10px;
+  text-decoration: line-through;
+}
+
+.product-rating {
+  margin: 10px 0;
+  color: #ffac4b;
+}
+
+.product-rating i {
+  font-size: 16px;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.product-actions .q {
+  background-color: #fff;
+  color: #ff4545;
+  border: 2px solid #ff4545;
+  padding: 8px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.product-actions .q:hover {
+  background-color: #ff4545;
+  color: #fff;
+}
+
+.add-to-cart-btn {
+  background-color: #ff4545;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #e63939;
+}
+
+.add-to-cart-btn i {
+  margin-right: 8px;
+}
+
+.section {
+  background-color: #f9f9f9;
+  padding: 30px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.products-slick {
+  padding: 30px 0;
+}
+
+.section-title .title {
+  font-size: 28px;
+  color: #222;
+  text-align: left;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.section-nav {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.section-tab-nav {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.section-tab-nav li {
+  margin: 0 10px;
+}
+
+.section-tab-nav li a {
+  color: #666;
+  text-decoration: none;
+  padding: 8px 20px;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.section-tab-nav li.active a {
+  color: #ff4545;
+  border-bottom: 3px solid #ff4545;
+  font-weight: 600;
+}
+
+.section-tab-nav li a:hover {
+  color: #ff4545;
+}
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+.row {
+  margin-bottom: 30px;
+}
+
+.col-lg-3, .col-md-4, .col-sm-6, .col-xs-12 {
+  padding: 10px;
+}
