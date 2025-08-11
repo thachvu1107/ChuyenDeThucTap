@@ -1,0 +1,53 @@
+.auth-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.auth-dropdown-button .dropdown-toggle {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.25s ease;
+}
+
+.auth-dropdown-button .dropdown-toggle:hover,
+.auth-dropdown-button .dropdown-toggle:focus {
+  background-color: #f7f7f7;
+  border-color: #bbb;
+}
+
+.auth-dropdown-button .dropdown-menu {
+  min-width: 220px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 8px 0;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.auth-dropdown-button .dropdown-item {
+  font-size: 14px;
+  padding: 8px 16px;
+  color: #444;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.auth-dropdown-button .dropdown-item:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.auth-dropdown-button .dropdown-divider {
+  margin: 6px 0;
+}
+
+.auth-wrapper .fa-user {
+  color: #4a90e2;
+}
+
+.auth-wrapper .fa-sign-out-alt {
+  color: #d9534f;
+}
