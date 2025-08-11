@@ -1,13 +1,13 @@
-﻿namespace vuthach111.Model
-{
-    
-        public class Category
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
+﻿using vuthach111.Model;
 
-            // Liên kết với Product
-            //public List<Product> Products { get; set; }
-        }
-    
+namespace vuthach111.Model
+{
+    public class Category
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+
+
+        public List<Product>? Products { get; set; }
+    }
 }

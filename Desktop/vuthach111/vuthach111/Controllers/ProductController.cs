@@ -1,75 +1,136 @@
-﻿using vuthach111.Model;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using vuthach111.Data;
+using vuthach111.Model;
+using System.Linq;
+using vuthach111.DTO;
+
 
 namespace vuthach111.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] 
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly AppDbContext pro;
+        private readonly AppDbContext _context;
 
         public ProductController(AppDbContext context)
         {
-            pro = context;
+            _context = context;
         }
 
-        // GET: api/Product
+        // Lấy danh sách sản phẩm
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetProducts()
         {
-            var products = await pro.Products.ToListAsync();
-            return Ok(products);
+            return Ok(_context.Products.ToList());
         }
-
-        // GET: api/Product/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public IActionResult GetProductById(int id)
         {
-            var product = await pro.Products.FindAsync(id);
-            if (product == null) return NotFound();
+            var product = _context.Products
+                .Where(p => p.ID == id)
+                .FirstOrDefault(); // Tìm sản phẩm theo ID
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
             return Ok(product);
         }
 
-        // POST: api/Product
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Product product)
+
+        // Thêm sản phẩm mới
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromForm] ProductDto dto)
         {
-            pro.Products.Add(product);
-            await pro.SaveChangesAsync();
-            return Ok(product);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var objPro = new Product
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                Price = dto.Price,
+                CategoryId = dto.CategoryId,
+                Stock = dto.Stock
+            };
+
+            if (dto.ImageFile != null && dto.ImageFile.Length > 0)
+            {
+                string fileName = Path.GetFileName(dto.ImageFile.FileName);
+                string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+                string filePath = Path.Combine(folderPath, fileName);
+
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await dto.ImageFile.CopyToAsync(stream);
+                }
+
+                objPro.Image = "/images/" + fileName;
+            }
+
+            _context.Products.Add(objPro);
+            await _context.SaveChangesAsync();
+
+            return Ok(objPro);
         }
 
-        // PUT: api/Product/5
+
+
+
+        // Sửa sản phẩm
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Product product)
+        public async Task<IActionResult> UpdateProduct(int id, [FromForm] ProductDto dto)
         {
-            var existing = await pro.Products.FindAsync(id);
-            if (existing == null) return NotFound();
+            var product = _context.Products.FirstOrDefault(p => p.ID == id);
+            if (product == null)
+                return NotFound();
 
-            existing.Name = product.Name;
-            existing.Price = product.Price;
-            existing.Image = product.Image;
+            product.Name = dto.Name;
+            product.Description = dto.Description;
 
-            pro.Products.Update(existing);
-            await pro.SaveChangesAsync();
-            return Ok(existing);
+            product.Price = dto.Price;
+            product.CategoryId = dto.CategoryId;
+            product.Stock = dto.Stock;
+
+            if (dto.ImageFile != null && dto.ImageFile.Length > 0)
+            {
+                string fileName = Path.GetFileName(dto.ImageFile.FileName);
+                string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+                string filePath = Path.Combine(folderPath, fileName);
+
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await dto.ImageFile.CopyToAsync(stream);
+                }
+
+                // Cập nhật đường dẫn ảnh
+                product.Image = "/images/" + fileName;
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok(product);
         }
 
-        // DELETE: api/Product/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var product = await pro.Products.FindAsync(id);
-            if (product == null) return NotFound();
 
-            pro.Products.Remove(product);
-            await pro.SaveChangesAsync();
-            return Ok(new { message = "Deleted successfully" });
+        // Xóa sản phẩm
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduct(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.ID == id);
+            if (product == null)
+                return NotFound();
+
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+            return Ok(new { message = "Xóa thành công" });
         }
     }
 }
