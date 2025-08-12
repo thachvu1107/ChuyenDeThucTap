@@ -18,16 +18,16 @@ export default function Menu() {
       <div className="brand-logo mb-4" style={{ textAlign: "center" }}>
         <a href="/dashboard" style={{ textDecoration: "none", color: "#fff" }}>
           <img
-            src="/admin/dist/img/logop.png"
+            src="/admin/dist/img/LOGO-XE-DAP.png"
             alt="Logo"
             style={{
-              width: "50px",
-              borderRadius: "50%",
+              width: "70%",
+              borderRadius: "10%",
               marginBottom: "10px",
             }}
           />
           <div style={{ fontWeight: "bold", fontSize: "18px" }}>
-            Tiedo#Store
+            THẾ GIỚI XE ĐẠP
           </div>
         </a>
       </div>
@@ -42,8 +42,6 @@ export default function Menu() {
             Quản lý
           </div>
           <ul style={{ listStyle: "none", paddingLeft: "0" }}>
-            
-
             <li style={{ margin: "8px 0" }}>
               <Link to="/dashboard" style={linkStyle}>
                 <i className="fa fa-box mr-2" /> Sản phẩm
