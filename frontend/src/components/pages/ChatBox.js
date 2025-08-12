@@ -644,8 +644,15 @@ const ChatBox = () => {
 
         { key: "gia cao nhat", action: "highestPrice" },
         { key: "gia thap nhat", action: "lowestPrice" },
-        { key: "tìm quần", action: "searchProducts" }, // Add specific pattern
-        { key: "tim áo", action: "searchProducts" },
+        { key: "tìm xe", action: "searchProducts" }, // Add specific pattern
+        { key: "tim xe đạp", action: "searchProducts" },
+        { key: "tôi muốn tim xe đạp", action: "searchProducts" },
+        { key: "tôi muốn mua xe đạp", action: "searchProducts" },
+        { key: "tao muốn mua xe đạp", action: "searchProducts" },
+
+        { key: "xe đạp", action: "searchProducts" },
+        { key: "tim xe dạp", action: "searchProducts" },
+        { key: "xe dạp", action: "searchProducts" },
         { key: "giỏ hàng", action: "cartProduct" },
         { key: "thêm ", action: "cartProduct" },
         { key: "xem giỏ hàng ", action: "cartList" },
@@ -682,8 +689,8 @@ const ChatBox = () => {
       if (matchedPattern) {
         switch (matchedPattern.action) {
           case "greeting": {
-            const reply = `Chào bạn! 😊 Tôi là TIENDO#STORE Chatbot, hỗ trợ bạn mua sắm dễ dàng! Bạn có thể:
-- Tìm sản phẩm: "tìm áo sơ mi"
+            const reply = `Chào bạn! 😊 Tôi là THẾ GIỚI XE Chatbot, hỗ trợ bạn mua sắm dễ dàng! Bạn có thể:
+- Tìm sản phẩm: "tìm xe đạp nam"
 - Xem chi tiết: "chi tiết sản phẩm id [số]"
 - Quản lý giỏ hàng: "thêm vào giỏ hàng id [số] kích thước [size] màu [color] số lượng [số]", "xóa sản phẩm id [số]", "tăng/giảm số lượng sản phẩm id [số] số lượng [số]"
 - Xem giỏ hàng: "xem giỏ hàng" hoặc "số sản phẩm trong giỏ hàng"
@@ -749,6 +756,9 @@ Hãy hỏi bất kỳ câu gì, tôi sẽ giúp ngay!`;
             let searchInput;
             if (
               lowerInput === "xem" ||
+              lowerInput === "xem xe" ||
+              lowerInput === "xe dap" ||
+              lowerInput === "xe đạp" ||
               lowerInput === "sp" ||
               lowerInput === "sản phẩm" ||
               lowerInput === "xem sản phẩm"
@@ -762,30 +772,29 @@ Hãy hỏi bất kỳ câu gì, tôi sẽ giúp ngay!`;
                 .replace("xem", "")
                 .trim();
 
-              // Nếu sau khi loại bỏ từ khóa mà rỗng => yêu cầu nhập lại
               if (!searchInput) {
                 setMessages((prev) => [
                   ...prev,
                   {
                     role: "bot",
                     content:
-                      'Vui lòng cung cấp từ khóa tìm kiếm. Ví dụ: "tìm áo sơ mi", "xem quần jeans", hoặc "tìm sản phẩm áo".',
+                      'Vui lòng cung cấp từ khóa tìm kiếm. Ví dụ: "tìm xe đạp", "xem xe", hoặc "tìm sản phẩm xe".',
                   },
                 ]);
                 return;
               }
             }
-            console.log("Dữ liệu trả đi:", searchInput); // Debug log
+            // console.log("Dữ liệu trả đi:", searchInput);
 
             const products = await searchProducts(searchInput);
-            console.log("Dữ liệu trả về:", products); // Debug log
+            // console.log("Dữ liệu trả về:", products);
 
             if (products.length === 0) {
               setMessages((prev) => [
                 ...prev,
                 {
                   role: "bot",
-                  content: `Không tìm thấy sản phẩm nào với từ khóa "${searchInput}". Hãy thử từ khóa khác như "áo sơ mi" hoặc "quần jeans"!`,
+                  content: `Không tìm thấy sản phẩm nào với từ khóa "${searchInput}". Hãy thử từ khóa khác như "tìm xe" hoặc "xe đạp"!`,
                 },
               ]);
               return;
@@ -1617,7 +1626,7 @@ Hãy hỏi bất kỳ câu gì, tôi sẽ giúp ngay!`;
         {
           role: "bot",
           content:
-            "Xin lỗi, tôi chưa hiểu câu hỏi của bạn. 😅 Hãy thử hỏi về sản phẩm, chi tiết sản phẩm, giá cao/thấp nhất, tìm sản phẩm (VD: 'tìm áo'), hoặc nói 'chào' để biết thêm!",
+            "Xin lỗi, tôi chưa hiểu câu hỏi của bạn. 😅 Hãy thử hỏi về sản phẩm, chi tiết sản phẩm, giá cao/thấp nhất, tìm sản phẩm (VD: 'tìm xe'), hoặc nói 'chào' để biết thêm!",
         },
       ]);
     } catch (error) {
@@ -1644,7 +1653,7 @@ Hãy hỏi bất kỳ câu gì, tôi sẽ giúp ngay!`;
 
   return (
     <div className="chatbot-container">
-      <h2 className="chatbot-title">TIENDO#STORE Chatbot</h2>
+      <h2 className="chatbot-title">THẾ GIỚI XE ĐẠP Chatbot</h2>
       <div className="chatbox" ref={chatBoxRef}>
         {messages.map((msg, index) => (
           <div
@@ -1654,7 +1663,7 @@ Hãy hỏi bất kỳ câu gì, tôi sẽ giúp ngay!`;
             }`}
             dangerouslySetInnerHTML={{
               __html: `<strong>${
-                msg.role === "user" ? "Bạn: " : "TIENDO#STORE Bot: "
+                msg.role === "user" ? "Bạn: " : "THE GIOI XE DAP Bot: "
               }</strong>${msg.content}`,
             }}
           />
