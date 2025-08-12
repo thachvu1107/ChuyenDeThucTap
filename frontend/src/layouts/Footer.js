@@ -19,9 +19,9 @@ const Footer = () => {
               <p>Tiendo</p>
               <ul className="footer-links">
                 <li>
-                  <a href="#" aria-label="Địa chỉ: 26 Tu Xuong">
-                    <i className="fa fa-map-marker" aria-hidden="true"></i> 26
-                    Tu Xuong
+                  <a href="#" aria-label="Địa chỉ: 20 Tăng Nhơn Phú">
+                    <i className="fa fa-map-marker" aria-hidden="true"></i> 20 Tăng Nhơn Phú
+                    
                   </a>
                 </li>
                 <li>
@@ -35,11 +35,11 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="mailto:tiendo030204@gmail.com"
-                    aria-label="Email: tiendo030204@gmail.com"
+                    href="mailto:thegioixedap@gmail.com"
+                    aria-label="Email: thegioixedap@gmail.com"
                   >
                     <i className="fa fa-envelope-o" aria-hidden="true"></i>{" "}
-                    tiendo030204@gmail.com
+                    thegioixedap@gmail.com
                   </a>
                 </li>
               </ul>
@@ -54,16 +54,16 @@ const Footer = () => {
               </h3>
               <ul className="footer-links">
                 <li>
-                  <a href="#">Thời trang</a>
+                  <a href="#">Xe đạp</a>
                 </li>
                 <li>
-                  <a href="#">Thời trang nam</a>
+                  <a href="#">Xe đạp nam</a>
                 </li>
                 <li>
-                  <a href="#">Thời trang nữ</a>
+                  <a href="#">Xe đạp nữ</a>
                 </li>
                 <li>
-                  <a href="#">Thời trang trẻ em</a>
+                  <a href="#">Xe đạp trẻ em</a>
                 </li>
               </ul>
             </section>
@@ -144,7 +144,7 @@ const Footer = () => {
                 ))}
               </ul>
               <p className="mb-0 copyright">
-                &copy; {currentYear} Bản quyền thuộc về Tiến Đỗ. Được tạo với{" "}
+                &copy; {currentYear} Bản quyền thuộc về THẾ GIỚI XE ĐẠP. Được tạo với{" "}
                 <i className="fa fa-heart-o" aria-hidden="true"></i> bởi{" "}
                 <a
                   href="https://colorlib.com"

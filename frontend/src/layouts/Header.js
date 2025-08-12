@@ -132,9 +132,9 @@ class Header extends Component {
                     style={{ maxWidth: "50px" }}
                   >
                     <option value="0">All</option>
-                    <option value="1">Thời trang nam</option>
-                    <option value="2">Thời trang nữ</option>
-                    <option value="3">Thời trang trẻ em</option>
+                    <option value="1">Xe đạp nam</option>
+                    <option value="2">Xe đạp nữ</option>
+                    <option value="3">Xe đạp trẻ em</option>
                   </select>
                   <input
                     className="form-control"

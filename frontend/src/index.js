@@ -109,11 +109,15 @@ const router = createBrowserRouter([
     element: <Admin />,
     children: [
       {
-        index: true,
+        path: "thong_ke",
         element: <ThongKeDoanhThu />,
       },
+      // {
+      //   index: true,
+      //   element: <ProductList />,
+      // },
       {
-        path: "/dashboard/product",
+        index: true,
         element: <ProductList />,
       },
 

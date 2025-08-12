@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineProduct } from "react-icons/ai";
+
 export default function Menu() {
   return (
     <aside
@@ -18,16 +18,16 @@ export default function Menu() {
       <div className="brand-logo mb-4" style={{ textAlign: "center" }}>
         <a href="/dashboard" style={{ textDecoration: "none", color: "#fff" }}>
           <img
-            src="/admin/dist/img/LOGO-XE-DAP.png"
+            src="/admin/dist/img/logop.png"
             alt="Logo"
             style={{
-              width: "150px",
-              borderRadius: "10%",
+              width: "50px",
+              borderRadius: "50%",
               marginBottom: "10px",
             }}
           />
           <div style={{ fontWeight: "bold", fontSize: "18px" }}>
-            THẾ GIỚI XE ĐẠP
+            Tiedo#Store
           </div>
         </a>
       </div>
@@ -42,12 +42,18 @@ export default function Menu() {
             Quản lý
           </div>
           <ul style={{ listStyle: "none", paddingLeft: "0" }}>
+            
+
             <li style={{ margin: "8px 0" }}>
-              <Link to="/dashboard/product" style={linkStyle}>
-                <AiOutlineProduct />  Sản phẩm
+              <Link to="/dashboard" style={linkStyle}>
+                <i className="fa fa-box mr-2" /> Sản phẩm
               </Link>
             </li>
-
+            <li style={{ margin: "8px 0" }}>
+              <Link to="/dashboard/thong_ke" style={linkStyle}>
+                <i className="fa fa-box mr-2" /> Thống kê
+              </Link>
+            </li>
             <li style={{ margin: "8px 0" }}>
               <Link to="/dashboard/category" style={linkStyle}>
                 <i className="fa fa-list-alt mr-2" /> Danh mục
