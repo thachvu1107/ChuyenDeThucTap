@@ -7,7 +7,8 @@ import { Api } from "./../../api/Api";
 import "../css/PaymentButtons.css";
 import { ImageApi } from "../../api/ImageApi";
 import Swal from "sweetalert2";
-
+import animationData from "../../assets/Loading Lottie animation.json";
+import Lottie from "lottie-react";
 const formatVND = (amount) => {
   if (!amount && amount !== 0) return "0 ₫";
   return amount.toLocaleString("vi-VN", {
@@ -42,6 +43,7 @@ class Checkout extends Component {
       checkoutList: [],
       selectedItems: JSON.parse(localStorage.getItem("selectedItems")) || [],
       vnpayCallbackProcessed: false,
+      loadingPayment: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -362,13 +364,20 @@ class Checkout extends Component {
       });
   }
 
+  // handleCashOnDelivery() {
+  //   this.createOrder("COD").catch((error) => {
+  //     console.error("COD order failed:", error);
+  //   });
+  // }
   handleCashOnDelivery() {
-    this.createOrder("COD").catch((error) => {
-      console.error("COD order failed:", error);
+    this.setState({ loadingPayment: true });
+    this.createOrder("COD").finally(() => {
+      this.setState({ loadingPayment: false });
     });
   }
 
   handleVNPayPayment() {
+    this.setState({ loadingPayment: true });
     const total = this.state.total;
 
     if (!total || isNaN(total) || total <= 0) {
@@ -377,6 +386,7 @@ class Checkout extends Component {
         text: "Số tiền thanh toán không hợp lệ. Vui lòng kiểm tra giỏ hàng!",
       });
       return;
+      this.setState({ loadingPayment: false });
     }
 
     const paymentData = {
@@ -436,6 +446,16 @@ class Checkout extends Component {
 
     return (
       <div className="section">
+        {this.state.loadingPayment && (
+          <div className="loading-overlay">
+            <Lottie
+              animationData={animationData}
+              loop={true}
+              style={{ width: 200, height: 200 }}
+            />
+            <p>Đang xử lý thanh toán...</p>
+          </div>
+        )}
         <div className="container">
           <div className="row">
             <div className="col-md-7">

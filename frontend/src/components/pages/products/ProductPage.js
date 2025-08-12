@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProductItem from "./ProductItem";
 import { Api } from "./../../../api/Api";
-import '../../css/ProductPage.css';
+import "../../css/ProductPage.css";
+import loadingAnimation from "../../../assets/Hand Loding.json";
+import Lottie from "lottie-react";
 
 const ProductPage = ({ title }) => {
   const [products, setProducts] = useState([]);
@@ -82,7 +84,9 @@ const ProductPage = ({ title }) => {
                   {categories.map((category) => (
                     <li
                       key={category.id}
-                      className={category.id === currentCategory ? "active" : ""}
+                      className={
+                        category.id === currentCategory ? "active" : ""
+                      }
                     >
                       <a
                         onClick={() => handleClick(category.id)}
@@ -103,23 +107,38 @@ const ProductPage = ({ title }) => {
       <div className="section">
         <div className="container">
           {loading ? (
-            <div>Đang tải...</div>
+            <div style={{ textAlign: "center", padding: "50px" }}>
+              <Lottie
+                animationData={loadingAnimation}
+                loop={true}
+                style={{ width: 200, height: 200, margin: "0 auto" }}
+              />
+              <p>Đang tải sản phẩm...</p>
+            </div>
           ) : products.length > 0 ? (
             productRows.map((row, rowIndex) => (
               <div className="row product-row" key={rowIndex}>
                 {row.map((product) => (
-                  <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={product.id}>
+                  <div
+                    className="col-lg-3 col-md-4 col-sm-6 col-xs-12"
+                    key={product.id}
+                  >
                     <ProductItem product={product} />
                   </div>
                 ))}
               </div>
             ))
           ) : (
-            <div>Không tìm thấy sản phẩm nào.</div>
+            <div style={{ textAlign: "center", padding: "50px" }}>
+              <Lottie
+                animationData={loadingAnimation}
+                loop={true}
+                style={{ width: 200, height: 200, margin: "0 auto" }}
+              />
+              <p>Đang tải sản phẩm...</p>
+            </div>
           )}
-          {products.length < 12 && (
-            <p className="text-center mt-3">-,-</p>
-          )}
+          {products.length < 12 && <p className="text-center mt-3">-,-</p>}
         </div>
       </div>
     </div>

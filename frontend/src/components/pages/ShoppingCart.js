@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import { Api } from "./../../api/Api";
 import { ImageApi } from "../../api/ImageApi";
+import emptyCartAnimation from "../../assets/empty.json";
+import Lottie from "lottie-react";
 
 const formatVND = (price) => {
   return price.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
@@ -433,6 +435,15 @@ class ShoppingCart extends Component {
                 {loading ? (
                   <div className="spinner-container">
                     <Spinner animation="border" />
+                  </div>
+                ) : cartList.length === 0 ? (
+                  <div style={{ textAlign: "center", padding: "50px" }}>
+                    <Lottie
+                      animationData={emptyCartAnimation}
+                      loop={true}
+                      style={{ width: 250, height: 250, margin: "0 auto" }}
+                    />
+                    <p>Giỏ hàng của bạn đang trống</p>
                   </div>
                 ) : (
                   cartList.map((item) => (
