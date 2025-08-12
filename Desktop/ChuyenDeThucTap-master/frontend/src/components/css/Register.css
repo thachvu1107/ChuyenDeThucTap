@@ -1,0 +1,15 @@
+/* Nút đăng nhập / đăng ký */
+.auth-btn {
+  background-color: #e74c3c;
+  color: #fff;
+  font-weight: 500;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+.auth-btn:hover {
+  background-color: #cf3e30;
+  color: #fff;
+}

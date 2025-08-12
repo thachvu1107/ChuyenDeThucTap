@@ -1,0 +1,128 @@
+/* ==== Modal Body ==== */
+.login-modal-body {
+  background: linear-gradient(145deg, #f8f9fa, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+/* ==== Card ==== */
+.login-card {
+  background: #fff;
+  padding: 32px 28px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+/* ==== Title ==== */
+.login-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #e74c3c;
+  margin-bottom: 24px;
+}
+
+/* ==== Alert ==== */
+.login-alert {
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 10px;
+  animation: shake 0.3s ease;
+}
+
+/* ==== Form ==== */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ==== Input group ==== */
+.input-group {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.input-group-text {
+  background: #f8f9fa;
+  border: none;
+  padding: 0 14px;
+  font-size: 16px;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+}
+
+.form-control {
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  background: #fff;
+}
+
+.input-group:focus-within {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
+}
+
+.input-group:focus-within .input-group-text {
+  background: #e74c3c;
+  color: #fff;
+}
+
+/* ==== Button ==== */
+.login-btn {
+  background: #e74c3c;
+  border: none;
+  color: #fff;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.login-btn:hover {
+  background: #cf3e30;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.login-btn:disabled {
+  background: #bbb;
+  cursor: not-allowed;
+}
+
+/* ==== Animation ==== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
