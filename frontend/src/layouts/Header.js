@@ -97,10 +97,10 @@ class Header extends Component {
                 <i className="fa fa-map-marker" /> 20 Tang Nhon Phu
               </li>
               <li>
-                <i className="fa fa-envelope-o" /> tiendo030204@gmail.com
+                <i className="fa fa-envelope-o" /> vuthach11072004@gmail.com
               </li>
               <li>
-                <i className="fa fa-phone" /> +84-0372979543
+                <i className="fa fa-phone" /> +84-0325493237
               </li>
 
               <li>
