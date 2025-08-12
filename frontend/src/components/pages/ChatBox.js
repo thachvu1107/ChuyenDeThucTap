@@ -644,15 +644,8 @@ const ChatBox = () => {
 
         { key: "gia cao nhat", action: "highestPrice" },
         { key: "gia thap nhat", action: "lowestPrice" },
-        { key: "tìm xe", action: "searchProducts" }, // Add specific pattern
-        { key: "tim xe đạp", action: "searchProducts" },
-        { key: "tôi muốn tim xe đạp", action: "searchProducts" },
-        { key: "tôi muốn mua xe đạp", action: "searchProducts" },
-        { key: "tao muốn mua xe đạp", action: "searchProducts" },
-
-        { key: "xe đạp", action: "searchProducts" },
-        { key: "tim xe dạp", action: "searchProducts" },
-        { key: "xe dạp", action: "searchProducts" },
+        { key: "tìm quần", action: "searchProducts" }, // Add specific pattern
+        { key: "tim áo", action: "searchProducts" },
         { key: "giỏ hàng", action: "cartProduct" },
         { key: "thêm ", action: "cartProduct" },
         { key: "xem giỏ hàng ", action: "cartList" },
@@ -689,8 +682,8 @@ const ChatBox = () => {
       if (matchedPattern) {
         switch (matchedPattern.action) {
           case "greeting": {
-            const reply = `Chào bạn! 😊 Tôi là THẾ GIỚI XE Chatbot, hỗ trợ bạn mua sắm dễ dàng! Bạn có thể:
-- Tìm sản phẩm: "tìm xe đạp nam"
+            const reply = `Chào bạn! 😊 Tôi là TIENDO#STORE Chatbot, hỗ trợ bạn mua sắm dễ dàng! Bạn có thể:
+- Tìm sản phẩm: "tìm áo sơ mi"
 - Xem chi tiết: "chi tiết sản phẩm id [số]"
 - Quản lý giỏ hàng: "thêm vào giỏ hàng id [số] kích thước [size] màu [color] số lượng [số]", "xóa sản phẩm id [số]", "tăng/giảm số lượng sản phẩm id [số] số lượng [số]"
 - Xem giỏ hàng: "xem giỏ hàng" hoặc "số sản phẩm trong giỏ hàng"

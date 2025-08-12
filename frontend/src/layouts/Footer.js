@@ -16,7 +16,7 @@ const Footer = () => {
               <h3 id="gioi-thieu" className="footer-title">
                 Giới thiệu
               </h3>
-              <p>Tiendo</p>
+              <p>VuThach</p>
               <ul className="footer-links">
                 <li>
                   <a href="#" aria-label="Địa chỉ: 20 Tăng Nhơn Phú">
@@ -30,7 +30,7 @@ const Footer = () => {
                     aria-label="Số điện thoại: +84 0372979543"
                   >
                     <i className="fa fa-phone" aria-hidden="true"></i> +84
-                    0372979543
+                    0325493237
                   </a>
                 </li>
                 <li>

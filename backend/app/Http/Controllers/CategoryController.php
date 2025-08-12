@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function new($id)
     {
-        $products = Product::with('category')->where('category_id', $id)->orderBy('id', 'desc')->paginate(4);
+        $products = Product::with('category')->where('category_id', $id)->orderBy('id', 'desc')->paginate(8);
 
         foreach ($products as $product) {
             if ($product->reviews()->exists()) {
