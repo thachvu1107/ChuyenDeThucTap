@@ -20,7 +20,7 @@ export default function Contact() {
                 <div>
                   <strong>Địa chỉ:</strong>
                   <br />
-                  Tú Xương, Hiệp Phú, TP. Thủ Đức, TP. Hồ Chí Minh
+                  Hiệp Phú, TP. Thủ Đức, TP. Hồ Chí Minh
                 </div>
               </div>
               <div className="mb-3 d-flex align-items-start">
