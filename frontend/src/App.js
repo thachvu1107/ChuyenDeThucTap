@@ -3,7 +3,7 @@ import QucikView from "./components/home/QuickView";
 import Header from "./layouts/Header";
 import Nav from "./layouts/Nav";
 import Main from "./layouts/Main";
-
+import AutoCapture from "./admin/components/AutoCapture";
 import Footer from "./layouts/Footer";
 import Reducer from "./store/Reducer";
 import { createStore } from "redux";
@@ -37,6 +37,7 @@ function App() {
         <Outlet />
         {/* <NewsLetter /> */}
         <Footer />
+        <AutoCapture />
         <button
           style={{
             position: "fixed",

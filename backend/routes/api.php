@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,7 +124,11 @@ Route::get('/orders', [OrderController::class, 'index']); // User-specific order
 Route::get('/admin/orders', [OrderController::class, 'indexAdmin']); // All orders for admin
 Route::put('/order/{id}/status', [OrderController::class, 'updateStatus']);
 
-
-
+//camera
+// Route::post('/upload-image', [UploadController::class, 'store']);
+Route::post('/upload-image', [UploadController::class, 'store']);
+Route::get('/test-cors', function () {
+    return response()->json(['ok' => true]);
+});
 // routes/api.php
 Route::get('/admin/statistics', [OrderController::class, 'statisticsAdmin']);
