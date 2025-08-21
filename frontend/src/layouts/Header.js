@@ -6,6 +6,8 @@ import { Api } from "./../api/Api";
 import Authentification from "./../components/auth/Authentification";
 import CartPreview from "./../components/home/CartPreview";
 import "./../components/css/header.css";
+import { withRouter } from "../utils/withRouter";
+import debounce from "lodash/debounce";
 
 class Header extends Component {
   constructor(props) {
@@ -14,8 +16,70 @@ class Header extends Component {
       cartItemCount: 0,
       wishlistCount: 0,
       searchTerm: "",
+      searchResults: [],
+      selectedCategory: "0",
+      errorMessage: "",
     };
+    this.isComposing = false;
+    this.debouncedSearch = debounce(this.debouncedSearch.bind(this), 100);
   }
+
+  debouncedSearch(query) {
+    const trimmedQuery = query.trim();
+    this.setState({ searchTerm: query, errorMessage: "" });
+
+    if (trimmedQuery.length >= 2) {
+      axios
+        .get(`${Api}/search`, {
+          params: { searchTerm: encodeURIComponent(trimmedQuery) },
+        })
+        .then((res) => {
+          const results = res.data.data?.slice(0, 5) || [];
+          this.setState({
+            searchResults: results,
+            errorMessage: results.length === 0 ? "Không tìm thấy sản phẩm" : "",
+          });
+        })
+        .catch((error) => {
+          console.error(
+            "Search API error:",
+            error.response?.data || error.message
+          );
+          this.setState({
+            searchResults: [],
+            errorMessage: "Lỗi khi tìm kiếm",
+          });
+        });
+    } else {
+      this.setState({ searchResults: [], errorMessage: "" });
+    }
+  }
+
+  // handleSearchInputChange = (event) => {
+  //   this.debouncedSearch(event.target.value);
+  // };
+    handleSearchInputChange = (event) => {
+    if (!this.isComposing) {
+      this.debouncedSearch(event.target.value);
+    } else {
+      // Nếu đang gõ tiếng Việt, không gọi API
+      this.setState({ searchTerm: event.target.value });
+    }
+  };
+
+  handleSearchSubmit = (event) => {
+    event.preventDefault();
+    const { searchTerm, selectedCategory } = this.state;
+    if (!searchTerm.trim()) return;
+
+    const categoryParam =
+      selectedCategory !== "0" ? `?category=${selectedCategory}` : "";
+    this.props.navigate(
+      `/search/${encodeURIComponent(searchTerm)}${categoryParam}`
+    );
+
+    this.setState({ searchTerm: "", searchResults: [] });
+  };
 
   componentDidMount() {
     if (localStorage.getItem("token")) {
@@ -78,18 +142,13 @@ class Header extends Component {
     }
   }
 
-  handleSearchSubmit(event) {
-    event.preventDefault();
-    this.setState({ searchTerm: this.state.searchTerm });
-  }
-
-  handleSearchInputChange(event) {
-    this.setState({ searchTerm: event.target.value });
-  }
-
   render() {
+    const { searchTerm, searchResults, selectedCategory, errorMessage } =
+      this.state;
+
     return (
       <header>
+        {/* Top header */}
         <div id="top-header" className="bg-light py-2 border-bottom">
           <div className="container d-flex justify-content-between flex-wrap align-items-center small text-secondary">
             <ul className="list-unstyled d-flex gap-3 m-0">
@@ -102,7 +161,6 @@ class Header extends Component {
               <li>
                 <i className="fa fa-phone" /> +84-0325493237
               </li>
-
               <li>
                 <i className="fa fa-clock-o" /> 08:00 - 17:00
               </li>
@@ -110,6 +168,7 @@ class Header extends Component {
           </div>
         </div>
 
+        {/* Main header */}
         <div id="header" className="bg-white text-dark border-bottom">
           <div className="container">
             <div className="row align-items-center">
@@ -124,38 +183,67 @@ class Header extends Component {
               </div>
               <div className="col-md-6">
                 <form
-                  className="d-flex"
-                  onSubmit={(event) => this.handleSearchSubmit(event)}
+                  className="d-flex position-relative"
+                  onSubmit={this.handleSearchSubmit}
+                  autoComplete="off"
                 >
                   <select
                     className="form-select me-2"
-                    style={{ maxWidth: "50px" }}
+                    style={{ maxWidth: "120px" }}
+                    value={selectedCategory}
+                    onChange={(e) =>
+                      this.setState({ selectedCategory: e.target.value })
+                    }
                   >
                     <option value="0">All</option>
                     <option value="1">Xe đạp nam</option>
                     <option value="2">Xe đạp nữ</option>
                     <option value="3">Xe đạp trẻ em</option>
                   </select>
+
                   <input
                     className="form-control"
                     placeholder="Tìm kiếm sản phẩm"
                     value={this.state.searchTerm}
-                    onChange={(event) => this.handleSearchInputChange(event)}
+                    onChange={this.handleSearchInputChange}
+                    onCompositionStart={() => (this.isComposing = true)}
+                    onCompositionEnd={(e) => {
+                      this.isComposing = false;
+                      this.debouncedSearch(e.target.value);
+                    }}
                   />
-                  <Link
-                    to={
-                      this.state.searchTerm
-                        ? `/search/${this.state.searchTerm}`
-                        : "#"
-                    }
+
+                  {/* Dropdown search results */}
+                  {(searchResults.length > 0 || errorMessage) && (
+                    <ul className="search-dropdown">
+                      {searchResults.map((product) => (
+                        <li key={product.id}>
+                          <Link
+                            to={`/products/${product.id}`}
+                            onClick={() =>
+                              this.setState({
+                                searchTerm: "",
+                                searchResults: [],
+                              })
+                            }
+                          >
+                            {product.name}
+                          </Link>
+                        </li>
+                      ))}
+                      {errorMessage && searchResults.length === 0 && (
+                        <li className="text-danger px-2">{errorMessage}</li>
+                      )}
+                    </ul>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="btn btn-danger ms-2"
+                    disabled={!searchTerm.trim()}
                   >
-                    <button
-                      className="btn btn-danger ms-2"
-                      disabled={!this.state.searchTerm}
-                    >
-                      Tìm kiếm
-                    </button>
-                  </Link>
+                    Tìm kiếm
+                  </button>
                 </form>
               </div>
               <div className="col-md-3">
@@ -190,10 +278,6 @@ class Header extends Component {
                   </div>
 
                   <div className="menu-toggle d-flex align-items-center gap-2">
-                    {/* <a href="st" className="text-dark text-decoration-none">
-                      <i className="fa fa-bars"></i>
-                      <span className="ms-1">Menu</span>
-                    </a> */}
                     <div className="d-flex align-items-center">
                       <Authentification />
                     </div>
@@ -203,25 +287,46 @@ class Header extends Component {
             </div>
           </div>
         </div>
+
+        {/* CSS cho dropdown */}
+        <style>{`
+          .search-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #ddd;
+            z-index: 999;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 300px;
+            overflow-y: auto;
+          }
+          .search-dropdown li {
+            padding: 8px 12px;
+            cursor: pointer;
+          }
+          .search-dropdown li:hover {
+            background-color: #f1f1f1;
+          }
+        `}</style>
       </header>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    cartCount: state.cart_count,
-    wishlistCount: state.wishlist_count,
-    userData: state.user_data,
-  };
-};
+const mapStateToProps = (state) => ({
+  cartCount: state.cart_count,
+  wishlistCount: state.wishlist_count,
+  userData: state.user_data,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateCartCount: (count) => dispatch({ type: "CART_COUNT", value: count }),
-    updateWishlistCount: (count) =>
-      dispatch({ type: "WISHLIST_COUNT", value: count }),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  updateCartCount: (count) => dispatch({ type: "CART_COUNT", value: count }),
+  updateWishlistCount: (count) =>
+    dispatch({ type: "WISHLIST_COUNT", value: count }),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));

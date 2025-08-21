@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\VisitorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,7 @@ Route::delete('/products/{id}', 'App\Http\Controllers\ProductController@destroy'
 // Tim kiem
 Route::get('/search', 'App\Http\Controllers\ProductController@search');
 Route::post('/search/chatbox', 'App\Http\Controllers\ProductController@searchChatBox');
+
 
 
 // Product Orders
@@ -132,3 +134,7 @@ Route::get('/test-cors', function () {
 });
 // routes/api.php
 Route::get('/admin/statistics', [OrderController::class, 'statisticsAdmin']);
+
+
+Route::post('/tracking', [VisitorController::class, 'track']);
+Route::get('/stats', [VisitorController::class, 'stats']);

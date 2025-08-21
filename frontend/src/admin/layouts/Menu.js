@@ -67,6 +67,11 @@ export default function Menu() {
                 <i className="fa fa-user mr-2" /> Khách hàng
               </Link>
             </li>
+            <li style={{ margin: "8px 0" }}>
+              <Link to="/dashboard/track" style={linkStyle}>
+                <i className="fa fa-user mr-2" /> cc
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

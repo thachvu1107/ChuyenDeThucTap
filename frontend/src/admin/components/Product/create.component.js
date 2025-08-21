@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { withRouter } from "../../../utils/withRouter";
+
 import { Api } from "../../../api/Api";
 class CreateProduct extends Component {
   constructor() {
@@ -66,6 +68,7 @@ class CreateProduct extends Component {
           success: true,
         });
         this.getCategories();
+        this.props.navigate("/dashboard");
       })
       .catch((err) => {
         this.setState({
@@ -93,9 +96,17 @@ class CreateProduct extends Component {
       });
     }
   }
+  // fileSelectHandler(event) {
+  //   this.setState({
+  //     photos: event.target.files[0],
+
+  //   });
+  // }
   fileSelectHandler(event) {
+    const file = event.target.files[0]; 
     this.setState({
-      photos: event.target.files[0], // chỉ chọn ảnh đầu tiên
+      photos: file,
+      previewUrl: URL.createObjectURL(file), 
     });
   }
 
@@ -191,7 +202,7 @@ class CreateProduct extends Component {
                       />
                     </div>
                   </div>
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label className="small mb-1">Hình ảnh</label>
                     <input
                       className="form-control"
@@ -201,6 +212,25 @@ class CreateProduct extends Component {
                       style={{ paddingTop: "3px" }}
                       required
                     />
+                  </div> */}
+                  <div className="form-group">
+                    <label className="small mb-1">Hình ảnh</label>
+                    <input
+                      className="form-control"
+                      onChange={this.fileSelectHandler}
+                      type="file"
+                      style={{ paddingTop: "3px" }}
+                      required
+                    />
+                    {this.state.previewUrl && (
+                      <div className="mt-2">
+                        <img
+                          src={this.state.previewUrl}
+                          alt="Preview"
+                          style={{ maxWidth: "200px", maxHeight: "200px" }}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="col-xl-6">
@@ -280,4 +310,4 @@ class CreateProduct extends Component {
   }
 }
 
-export default CreateProduct;
+export default withRouter(CreateProduct);

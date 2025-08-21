@@ -440,16 +440,7 @@ class ProductDetail extends Component {
                           <i className="fa fa-heart-o"></i> Thêm vào yêu thích
                         </a>
                       </li>
-                      {/* <li>
-                        <a href="#">
-                          <i className="fa fa-exchange"></i> So sánh
-                        </a>
-                      </li> */}
-                      {/* <li>
-                        <a href="#" id={product.id} onClick={this.handleClick}>
-                          <i className="fa fa-eye"></i> Xem nhanh
-                        </a>
-                      </li> */}
+                      
                     </ul>
 
                     <div className="product-links">
@@ -684,91 +675,7 @@ class ProductDetail extends Component {
           </div>
         </Modal.Body>
 
-        {/* <div className="section">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <div className="section-title text-center">
-                  <h3 className="title">Sản phẩm liên quan</h3>
-                </div>
-              </div>
-              {relatedProducts.map((relatedProduct) => (
-                <div className="col-md-3 col-xs-6" key={relatedProduct.id}>
-                  <div className="product">
-                    <div className="product-img">
-                      <img
-                        src={`${ImageApi}/img/${relatedProduct.photo}`}
-                        alt={relatedProduct.name}
-                      />
-                      <div className="product-label">
-                        {relatedProduct.new && <span className="new">MỚI</span>}
-                      </div>
-                    </div>
-                    <div className="product-body">
-                      <p className="product-category">
-                        {relatedProduct.category.name}
-                      </p>
-                      <h3 className="product-name">
-                        <Link to={`/product/${relatedProduct.id}`}>
-                          {relatedProduct.name}
-                        </Link>
-                      </h3>
-                      <h4 className="product-price">
-                        {(
-                          relatedProduct.price -
-                          relatedProduct.price * 0.1
-                        ).toLocaleString("vi-VN", {
-                          style: "currency",
-                          currency: "VND",
-                        })}
-                        <del className="product-old-price">
-                          {relatedProduct.price.toLocaleString("vi-VN", {
-                            style: "currency",
-                            currency: "VND",
-                          })}
-                        </del>
-                      </h4>
-                      <div className="product-rating"></div>
-                      <div className="product-btns">
-                        <Button
-                          id={product.id}
-                          className="add-to-wishlist"
-                          onClick={this.handleWishlist}
-                          bsPrefix="q"
-                        >
-                          <i id={product.id} className="fa fa-heart-o"></i>
-                          <span className="tooltipp">Thêm vào yêu thích</span>
-                        </Button>
-                        <button className="add-to-compare">
-                          <i className="fa fa-exchange"></i>
-                          <span className="tooltipp">So sánh</span>
-                        </button>
-                        <button className="quick-view">
-                          <i className="fa fa-eye"></i>
-                          <span className="tooltipp">Xem nhanh</span>
-                        </button>
-                      </div>
-                    </div>
-                    <div className="add-to-cart">
-                      <button
-                        id={product.id}
-                        className="add-to-cart-btn"
-                        onClick={this.handleClick}
-                      >
-                        <i
-                          id={product.id}
-                          onClick={this.handleClick}
-                          className="fa fa-shopping-cart"
-                        ></i>{" "}
-                        Thêm vào giỏ
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div> */}
+       
         <div className="section">
           <div className="container">
             <div className="row">

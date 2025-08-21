@@ -11,6 +11,9 @@ import { Provider } from "react-redux";
 import { Outlet } from "react-router-dom";
 import ChatBox from "./components/pages/ChatBox";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Api } from "./api/Api";
+import axios from "axios";
+
 
 import React, { useState, useEffect } from "react";
 const store = createStore(
@@ -26,7 +29,11 @@ function App() {
   useEffect(() => {
     localStorage.setItem("showChatBot", JSON.stringify(showChatBot));
   }, [showChatBot]);
-
+ useEffect(() => {
+    axios.post(`${Api}/tracking`, {
+      path: window.location.pathname,
+    });
+  }, []);
   return (
     <div>
       <Provider store={store}>

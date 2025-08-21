@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Api } from "../../../api/Api";
+import { Api, BaseUrl } from "../../../api/Api";
 
 export default function EditProduct() {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ export default function EditProduct() {
     color: "",
     quantity: "",
   });
+  const [previewUrl, setPreviewUrl] = useState(null);
   const [validationError, setValidationError] = useState({});
   const [categories, setCategories] = useState([]);
 
@@ -44,7 +45,11 @@ export default function EditProduct() {
         size: stockInfo.size || "",
         color: stockInfo.color || "",
         quantity: stockInfo.quantity || "",
+        image: null,
       }));
+      setPreviewUrl(
+        productData.photo ? `${BaseUrl}/img/${productData.photo}` : null
+      );
     } catch (error) {
       Swal.fire({
         text:
@@ -80,6 +85,7 @@ export default function EditProduct() {
     const { name, value, files } = event.target;
     if (name === "image") {
       setProduct((prevState) => ({ ...prevState, image: files[0] }));
+      setPreviewUrl(URL.createObjectURL(files[0]));
     } else {
       setProduct((prevState) => ({ ...prevState, [name]: value }));
     }
@@ -292,6 +298,14 @@ export default function EditProduct() {
                   </Row>
                   <Row>
                     <Col>
+                      {/* <Form.Group controlId="Image" className="mb-3">
+                        <Form.Label>Hình ảnh</Form.Label>
+                        <Form.Control
+                          type="file"
+                          name="image"
+                          onChange={changeHandler}
+                        />
+                      </Form.Group> */}
                       <Form.Group controlId="Image" className="mb-3">
                         <Form.Label>Hình ảnh</Form.Label>
                         <Form.Control
@@ -299,6 +313,15 @@ export default function EditProduct() {
                           name="image"
                           onChange={changeHandler}
                         />
+                        {previewUrl && (
+                          <div className="mt-2">
+                            <img
+                              src={previewUrl}
+                              alt="Preview"
+                              style={{ maxWidth: "200px", maxHeight: "200px" }}
+                            />
+                          </div>
+                        )}
                       </Form.Group>
                     </Col>
                   </Row>
@@ -320,3 +343,4 @@ export default function EditProduct() {
     </div>
   );
 }
+

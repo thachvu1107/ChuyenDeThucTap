@@ -18,7 +18,7 @@ import CreateProduct from "./admin/components/Product/create.component";
 import EditProduct from "./admin/components/Product/edit.component";
 
 import CategoryList from "./admin/components/Category/CategoryList";
-
+import ThongKeTruyCap from "./admin/components/thongKe/ThongKeTruyCap";
 import News from "./components/pages/News";
 import Contact from "./components/pages/Contact";
 import Feedback from "./components/pages/Feedback";
@@ -136,6 +136,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/order",
         element: <OrderAdmin />,
+      },
+       {
+        path: "/dashboard/track",
+        element: <ThongKeTruyCap />,
       },
       {
         path: "/dashboard/customer",
